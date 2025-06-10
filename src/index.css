@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "./fonts.css";
+@config "../tailwins.config.ts"
+
+@layer base {
+  .container {
+    @apply mx-auto max-w-[1140px] px-4;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,33 @@
+/* jost - latin */
+@font-face {
+  font-display: swap;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/jost-v19-latin-regular.woff2") format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/jost-v19-latin-700.woff2") format("woff2");
+}
+
+/* playfair-display - latin */
+
+@font-face {
+  font-display: swap;
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/playfair-display-v39-latin-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/playfair-display-v39-latin-700.woff2") format("woff2");
+}
