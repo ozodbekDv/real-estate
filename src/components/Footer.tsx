@@ -120,7 +120,7 @@ function Footer() {
           <div>
             <p>Copyright 2022 flora. All Rights Reserved</p>
           </div>
-          <div>
+          <div className="flex gap-[30px]">
             <Link to="/terms">Terms & Conditions</Link>
             <Link to="/privacy">Privacy Policy</Link>
           </div>
