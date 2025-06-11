@@ -5,8 +5,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: "var(--font-sans)",
-        sarif: "var(--font-sarif)",
+        jost: "Jost",
+        secondary: "Playfair Display",
       },
       animation: {
         "ping-large": "ping-large 1s ease-in-out infinite",
@@ -95,7 +95,7 @@ const config: Config = {
           "5": "#0e0e0e0d",
         },
         gray: {
-          500: "#999999",
+          500: "#A4A6AC",
           "90": "#999999e6",
           "80": "#999999cc",
           "20": "#99999933",
