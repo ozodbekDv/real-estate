@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import type { RootState } from "./app/store";
+
 import MainLayout from "./layouts/MainLayout";
 import {
   Contact,
@@ -12,12 +14,15 @@ import {
   Login,
   SignUp,
 } from "./pages/";
+// import { useAppSelector } from "./hooks/useAppStore";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { user } = useSelector((state: RootState) => state.user);
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: user ? <MainLayout /> : <Login />,
       children: [
         {
           index: true,

@@ -1,3 +1,4 @@
+// store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import UserReducer from "./features/userSlice";
 
@@ -7,11 +8,4 @@ export const store = configureStore({
   },
 });
 
-interface UserState {
-  name: string;
-}
-
-export interface RootState {
-  user: UserState;
-  // other slices of state
-}
+export type RootState = ReturnType<typeof store.getState>;
