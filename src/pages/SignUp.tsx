@@ -38,7 +38,7 @@ function SignUp() {
             </h2>
             <p className="text-gray-500">Please enter details</p>
           </div>
-          <form className="w-[445px]" onSubmit={handleSubmit}>
+          <form className="w-[445px] text-center" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-4">
               <div className="grid w-full items-center gap-3">
                 <Label className="text-dark-500" htmlFor="email">
@@ -102,6 +102,9 @@ function SignUp() {
             <button className="bg-primary-500 text-white rounded-[10px] inline-block w-full py-4 mt-[30px] cursor-pointer">
               Signup
             </button>
+            <Link to="/login" className="mx-auto underline text-primary-500">
+              already have acount please login
+            </Link>
           </form>
         </div>
       </div>
