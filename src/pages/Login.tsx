@@ -29,7 +29,7 @@ function Login() {
             <h2 className="text-[30px] font-bold font-secondary">Welcome 👋</h2>
             <p className="text-gray-500">Please login here</p>
           </div>
-          <form className="w-[445px]" onSubmit={handleSubmit}>
+          <form className="w-[445px] text-center" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-4">
               <div className="grid w-full items-center gap-3">
                 <Label className="text-dark-500" htmlFor="email">
@@ -71,6 +71,9 @@ function Login() {
             <button className="bg-primary-500 text-white rounded-[10px] inline-block w-full py-4 mt-[30px] cursor-pointer">
               Login
             </button>
+            <Link to="/signup" className="mx-auto underline text-primary-500">
+              or need create acount?
+            </Link>
           </form>
         </div>
       </div>
