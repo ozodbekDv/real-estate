@@ -1,9 +1,20 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useLogin } from "@/hooks/useLogin";
 import { Link } from "react-router-dom";
 
 function Login() {
+  const { login } = useLogin();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    console.log(email, password);
+    login(email, password);
+  };
   return (
     <div className="grid grid-cols-[10fr_7fr]  gap-[50px] justify-between items-center">
       <img
@@ -18,19 +29,29 @@ function Login() {
             <h2 className="text-[30px] font-bold font-secondary">Welcome 👋</h2>
             <p className="text-gray-500">Please login here</p>
           </div>
-          <form className="w-[445px]">
+          <form className="w-[445px]" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-4">
               <div className="grid w-full items-center gap-3">
                 <Label className="text-dark-500" htmlFor="email">
                   Email Address
                 </Label>
-                <Input type="email" id="email" placeholder="Email" />
+                <Input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                />
               </div>
               <div className="grid w-full items-center gap-3">
                 <Label className="text-dark-500" htmlFor="password">
                   Password
                 </Label>
-                <Input type="password" id="password" placeholder="Password" />
+                <Input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                />
               </div>
               <div className="flex justify-between">
                 <div className="flex gap-[10px] items-center">
