@@ -57,7 +57,7 @@ function Header() {
             );
           })}
         </nav>
-        <button className="rounded-[10px] bg-primary-500 py-[13.5px] px-[30px] inline-block text-white">
+        <button className="rounded-[10px] bg-primary-500 md:py-[13.5px] py-2 md:px-[30px] px-5 inline-block text-white">
           Login
         </button>
         {/* Mobile nav */}

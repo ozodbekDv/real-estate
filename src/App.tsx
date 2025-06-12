@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import type { RootState } from "./app/store";
 
 import MainLayout from "./layouts/MainLayout";
@@ -14,11 +18,13 @@ import {
   Login,
   SignUp,
 } from "./pages/";
-// import { useAppSelector } from "./hooks/useAppStore";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { isAuthReady, login } from "./app/features/userSlice";
 
 function App() {
-  const { user } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+  const { user, isAuth } = useSelector((state: RootState) => state.user);
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -60,14 +66,22 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login />,
+      element: user ? <Navigate to="/" /> : <Login />,
     },
     {
       path: "/signup",
-      element: <SignUp />,
+      element: user ? <Navigate to="/" /> : <SignUp />,
     },
   ]);
-  return <RouterProvider router={routes} />;
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      dispatch(login(user));
+    }
+    dispatch(isAuthReady());
+  }, []);
+
+  return <>{isAuth && <RouterProvider router={routes} />}</>;
 }
 
 export default App;

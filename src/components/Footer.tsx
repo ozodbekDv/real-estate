@@ -57,7 +57,7 @@ function Footer() {
   return (
     <div className="bg-primary-500 text-white py-[30px]">
       <div className="container">
-        <div className="flex justify-between">
+        <div className="flex flex-col items-center gap-10 lg:flex-row justify-between">
           <div>
             <Link to="/">
               <img className="mb-5" src="../logo-white.svg" alt="site logo" />
@@ -67,7 +67,7 @@ function Footer() {
               tempus felis vitae sit est quisque.
             </p>
           </div>
-          <div className="flex gap-[124.5px]">
+          <div className="grid grid-cols-2 items-center md:grid-cols-3 gap-[124.5px]">
             <div className="">
               <h4 className="mb-5 font-bold">About</h4>
               <div className="flex gap-4 flex-col">
@@ -78,7 +78,7 @@ function Footer() {
                 ))}
               </div>
             </div>
-            <div className="">
+            <div>
               <h4 className="mb-5 font-bold">Service</h4>
               <div className="flex gap-4 flex-col">
                 {serviceLinks.map((item, index) => (
@@ -95,7 +95,7 @@ function Footer() {
             <div>
               <h4 className="mb-5 font-bold">Our Location</h4>
               <p className="mb-4">
-                2972 Westheimer Rd. Santa Ana, Illinois 85486{" "}
+                2972 Westheimer Rd. Santa Ana, Illinois 85486
               </p>
               <div className="flex gap-4">
                 {socials.map((item, index) => (
@@ -116,7 +116,7 @@ function Footer() {
           </div>
         </div>
         <hr className="mt-[30px] mb-5 bg-white/20 border-0 outline-0 h-[1px]" />
-        <div className="flex justify-between">
+        <div className="flex flex-col gap-5 items-center md:flex-row justify-between">
           <div>
             <p>Copyright 2022 flora. All Rights Reserved</p>
           </div>
