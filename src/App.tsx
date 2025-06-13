@@ -21,6 +21,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { isAuthReady, login } from "./app/features/userSlice";
+import ProtectedRoute from "./components/ProtectedRoutes";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function App() {
   const routes = createBrowserRouter([
     {
       path: "/",
-      element: user ? <MainLayout /> : <Login />,
+      element: <MainLayout />,
       children: [
         {
           index: true,
@@ -36,27 +37,51 @@ function App() {
         },
         {
           path: "/about",
-          element: <About />,
+          element: (
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "/contact",
-          element: <Contact />,
+          element: (
+            <ProtectedRoute>
+              <Contact />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "/favourite",
-          element: <MyFavourite />,
+          element: (
+            <ProtectedRoute>
+              <MyFavourite />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "/agents",
-          element: <OurAgents />,
+          element: (
+            <ProtectedRoute>
+              <OurAgents />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "/properties",
-          element: <Properties />,
+          element: (
+            <ProtectedRoute>
+              <Properties />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "/terms",
-          element: <Terms />,
+          element: (
+            <ProtectedRoute>
+              <Terms />
+            </ProtectedRoute>
+          ),
         },
       ],
     },
@@ -66,7 +91,7 @@ function App() {
     },
     {
       path: "/login",
-      element: user ? <Navigate to="/" /> : <Login />,
+      element: <Login />,
     },
     {
       path: "/signup",

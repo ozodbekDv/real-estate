@@ -99,7 +99,7 @@ function SignUp() {
                 </div>
               </div>
             </div>
-            <button className="bg-primary-500 text-white rounded-[10px] inline-block w-full py-4 mt-[30px] cursor-pointer">
+            <button className="bg-primary-500 text-white rounded-10 inline-block w-full py-4 mt-[30px] cursor-pointer">
               Signup
             </button>
             <Link to="/login" className="mx-auto underline text-primary-500">

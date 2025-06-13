@@ -68,7 +68,7 @@ function Login() {
                 </Link>
               </div>
             </div>
-            <button className="bg-primary-500 text-white rounded-[10px] inline-block w-full py-4 mt-[30px] cursor-pointer">
+            <button className="bg-primary-500 text-white rounded-10 inline-block w-full py-4 mt-[30px] cursor-pointer">
               Login
             </button>
             <Link to="/signup" className="mx-auto underline text-primary-500">

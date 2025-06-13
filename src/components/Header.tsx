@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
@@ -57,9 +55,7 @@ function Header() {
             );
           })}
         </nav>
-        <button className="rounded-[10px] bg-primary-500 md:py-[13.5px] py-2 md:px-[30px] px-5 inline-block text-white">
-          Login
-        </button>
+        <button className="button-primary">Login</button>
         {/* Mobile nav */}
         <div className="absolute right-[40px] md:hidden">
           <Sheet>
