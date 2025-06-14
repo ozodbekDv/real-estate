@@ -1,10 +1,17 @@
+import { useEffect } from "react";
+// router-dom
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import type { RootState } from "./app/store";
 
+// redux toolkit
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "./app/store";
+import { isAuthReady, login } from "./app/features/userSlice";
+
+// local files - compoentns, pages, layouts
 import MainLayout from "./layouts/MainLayout";
 import {
   Contact,
@@ -18,9 +25,6 @@ import {
   Login,
   SignUp,
 } from "./pages/";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { isAuthReady, login } from "./app/features/userSlice";
 import ProtectedRoute from "./components/ProtectedRoutes";
 
 function App() {
@@ -80,6 +84,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <Terms />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/*",
+          element: (
+            <ProtectedRoute>
+              <NotFound />
             </ProtectedRoute>
           ),
         },
