@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // shadcn
 import {
@@ -36,6 +36,7 @@ const pages = [
 ];
 
 function Header() {
+  const location = useLocation();
   return (
     <div className="container">
       <div className="flex justify-around md:justify-between items-center py-5">
@@ -44,11 +45,14 @@ function Header() {
         </Link>
         <nav className="md:gap-[30px] hidden md:flex">
           {pages.map((page, index) => {
+            const active = page.path === location.pathname;
             return (
               <Link
                 to={page.path}
                 key={index}
-                className="text-dark-500 hover:underline"
+                className={`hover:underline ${
+                  active ? "text-primary-500" : "text-dark-500 "
+                }`}
               >
                 {page.name}
               </Link>
