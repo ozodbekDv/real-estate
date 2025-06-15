@@ -146,6 +146,9 @@ body {
   .rounded-10 {
     border-radius: 10px;
   }
+  .heading {
+    @apply font-secondary font-bold;
+  }
 }
 
 .button-primary {

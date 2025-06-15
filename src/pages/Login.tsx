@@ -16,17 +16,20 @@ function Login() {
     login(email, password);
   };
   return (
-    <div className="grid grid-cols-[10fr_7fr]  gap-[50px] justify-between items-center">
+    <div className="md:grid md:grid-cols-[10fr_7fr] md:gap-[50px] items-center">
       <img
-        className="object-contain h-[100dvh]"
+        className="object-cover w-[100vw] md:h-[100dvh] absolute md:static -z-99"
         src="../images/login-bg.png"
         alt="house image"
       />
-      <div>
+      <div className="bg-white/70 absolute top-0 bottom-0 right-0 left-0 z-10" />
+      <div className="ml-[100px] relative z-11 ">
         <img className="" src="../logo.svg" alt="site logo" />
         <div>
           <div className="mb-[30px] mt-[50px]">
-            <h2 className="text-[30px] font-bold font-secondary">Welcome 👋</h2>
+            <h2 className="text-[30px] font-bold font-secondary z-11">
+              Welcome 👋
+            </h2>
             <p className="text-gray-500">Please login here</p>
           </div>
           <form className="w-[445px] text-center" onSubmit={handleSubmit}>
