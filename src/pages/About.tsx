@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, LucidePlay } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const missionData = [
@@ -32,7 +32,13 @@ function About() {
           </div>
         </div>
       </div>
-      <div className="container flex flex-col gap-[100px] text-dark-500">
+      <div className="container flex flex-col gap-[100px] text-dark-500 relative">
+        <img
+          className="absolute right-0 translate-x-[50%]"
+          src="../icons/hero-pattern-bottom.svg"
+          alt="shape extra"
+        />
+
         <div>
           <h2 className="heading text-[40px] mt-[50px] w-[653px]">
             We are on a mission to change view of real estate field
@@ -58,6 +64,20 @@ function About() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+        <div className="relative">
+          <img
+            className="rounded-2xl"
+            src="../images/about/about-video-bg.png"
+            alt="video background"
+          />
+          <div className="bg-primary-500 text-white rounded-full w-14 h-14 flex items-center justify-center absolute top-[50%] right-[50%] translate-y-[-50%]">
+            <div className="absolute inset-0 rounded-full bg-white/10 scale-[1.6]"></div>
+            <div className="absolute inset-0 rounded-full bg-white/20 scale-[1.2]"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <LucidePlay />
+            </div>
           </div>
         </div>
         <div></div>
