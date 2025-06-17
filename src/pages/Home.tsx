@@ -1,4 +1,5 @@
 import { PropertiesCard, TestimonialsCard } from "@/components";
+import BackForwardBtns from "@/components/BackForwardBtns";
 import { ArrowLeft, ArrowRight, Bath, Bed, CarFront } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -335,14 +336,7 @@ function Home() {
             <h2 className="font-bold text-[40px] font-secondary">
               Testimonials
             </h2>
-            <div className="flex gap-5">
-              <button className="p-4 rounded-10 bg-gray-5 hover:bg-gray-10">
-                <ArrowLeft className="" />
-              </button>
-              <button className="p-4 rounded-10 bg-primary-500 hover:bg-primary-600">
-                <ArrowRight className="text-white" />
-              </button>
-            </div>
+            <BackForwardBtns />
           </div>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-[30px]">
             {testimonialsData.map((user, index) => (

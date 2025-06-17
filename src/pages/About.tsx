@@ -1,3 +1,4 @@
+import BackForwardBtns from "@/components/BackForwardBtns";
 import { ChevronRight, LucidePlay } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -80,7 +81,81 @@ function About() {
             </div>
           </div>
         </div>
-        <div></div>
+        <div className="flex gap-[60px] relative">
+          <img
+            src="../images/about/projects-middle.svg"
+            alt=""
+            className="absolute translate-[-75%]"
+          />
+          <div className="flex gap-[30px] items-center">
+            <img src="../images/about/projects-white.png" alt="" />
+            <img src="../images/about/projects-brown.png" alt="" />
+          </div>
+          <div>
+            <h2 className="heading text-[40px]">
+              250+ Projects all over the world
+            </h2>
+            <p className="text-gray-500 w-[500px] mb-[50px]">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit lorem
+              sagittis, proin ut lectus sed ut. Enim egestas enim id duis. Eu
+              aliquam nec risus bibendum nulla sit et volutpat. Semper proin
+              adipiscing sollicitudin et. Ac sed lorem amet, purus. Risus ut
+              nulla id lectus mi.
+            </p>
+            <BackForwardBtns />
+          </div>
+        </div>
+      </div>
+      <div className="mb-[100px] mt-[100px] bg-gray-5 py-[70px]">
+        <section className="container relative">
+          <h2 className="font-secondary mb-2.5 font-bold text-[40px]">
+            Our Agents
+          </h2>
+          <p className="text-gray-500 mb-[50px]">
+            Using it can make you sound like you have been studying english for
+            <br /> a long time. Here’s the challenge
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-[60px]">
+            <div>
+              <img className="mb-5" src="../images/agent-Leasie.png" alt="" />
+              <h3 className="font-bold font-secondary text-[24px] mb-2.5">
+                Leasie Willions
+              </h3>
+              <p className="text-gray-500 mb-5">Real Estate Agent</p>
+              <p className="w-[339px]">
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+            <div>
+              <img className="mb-5" src="../images/agent-johnson.png" alt="" />
+              <h3 className="font-bold font-secondary text-[24px] mb-2.5">
+                Johnson Watson
+              </h3>
+              <p className="text-gray-500 mb-5">Real Estate Agent</p>
+              <p className="w-[339px]">
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+            <div>
+              <img className="mb-5" src="../images/agent-mark.png" alt="" />
+              <h3 className="font-bold font-secondary text-[24px] mb-2.5">
+                Mark Allen
+              </h3>
+              <p className="text-gray-500 mb-5">Real Estate Agent</p>
+              <p className="w-[339px]">
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+              </p>
+            </div>
+          </div>
+          <img
+            className="absolute right-0 bottom-[-25px] hidden xl:block xl:translate-x-[219%] translate-y-[50%]"
+            src="../images/agents-bottom.svg"
+            alt="shape"
+          />
+        </section>
       </div>
     </div>
   );
