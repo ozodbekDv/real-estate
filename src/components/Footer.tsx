@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 const socials = [
@@ -67,37 +68,39 @@ function Footer() {
               tempus felis vitae sit est quisque.
             </p>
           </div>
-          <div className="grid grid-cols-2 items-center md:grid-cols-3 gap-[124.5px]">
-            <div className="">
-              <h4 className="mb-5 font-bold">About</h4>
-              <div className="flex gap-4 flex-col">
-                {aboutLinks.map((item, index) => (
-                  <Link to={item.href} key={index}>
-                    {item.name}
-                  </Link>
-                ))}
+          <div className="flex flex-col items-center md:flex-row gap-[100px]">
+            <div className="flex gap-[124px]">
+              <div className="w-[93px]">
+                <h4 className="mb-5 font-bold">About</h4>
+                <div className="flex gap-4 flex-col">
+                  {aboutLinks.map((item, index) => (
+                    <Link to={item.href} key={index}>
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="mb-5 font-bold">Service</h4>
+                <div className="flex gap-4 flex-col">
+                  {serviceLinks.map((item, index) => (
+                    <Link
+                      to={item.href}
+                      key={index}
+                      className="font-normal text-[16px]"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
-            <div>
-              <h4 className="mb-5 font-bold">Service</h4>
-              <div className="flex gap-4 flex-col">
-                {serviceLinks.map((item, index) => (
-                  <Link
-                    to={item.href}
-                    key={index}
-                    className="font-normal text-[16px]"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div>
+            <div className="text-center md:text-left">
               <h4 className="mb-5 font-bold">Our Location</h4>
               <p className="mb-4">
                 2972 Westheimer Rd. Santa Ana, Illinois 85486
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-4 justify-center md:justify-start">
                 {socials.map((item, index) => (
                   <span
                     key={index}
@@ -130,4 +133,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default React.memo(Footer);

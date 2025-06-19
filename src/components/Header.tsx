@@ -7,6 +7,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import React from "react";
 
 const pages = [
   {
@@ -99,4 +100,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default React.memo(Header);
