@@ -1,4 +1,6 @@
+import AgentCard from "@/components/AgentCard";
 import BackForwardBtns from "@/components/BackForwardBtns";
+import Hero from "@/components/Hero";
 import { ChevronRight, LucidePlay } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -24,15 +26,7 @@ const missionData = [
 function About() {
   return (
     <div>
-      <div className="[background-image:url(../images/about/about-bg.png)] bg-no-repeat w-[99dvw] bg-cover">
-        <div className="container py-[227px] text-center text-white">
-          <h1 className="heading text-[60px]">About Us</h1>
-          <div className="flex items-center w-[130px] mx-auto">
-            <Link to="/">Home</Link> <ChevronRight />
-            <Link to="/about">About Us</Link>
-          </div>
-        </div>
-      </div>
+      <Hero title={"About Us"} image="../images/about/about-bg.png" />
       <div className="container flex flex-col gap-[100px] text-dark-500 relative">
         <img
           className="absolute right-0 translate-x-[50%]"
@@ -116,39 +110,16 @@ function About() {
             <br /> a long time. Here’s the challenge
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-[60px]">
-            <div>
-              <img className="mb-5" src="../images/agent-Leasie.png" alt="" />
-              <h3 className="font-bold font-secondary text-[24px] mb-2.5">
-                Leasie Willions
-              </h3>
-              <p className="text-gray-500 mb-5">Real Estate Agent</p>
-              <p className="w-[339px]">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-              </p>
-            </div>
-            <div>
-              <img className="mb-5" src="../images/agent-johnson.png" alt="" />
-              <h3 className="font-bold font-secondary text-[24px] mb-2.5">
-                Johnson Watson
-              </h3>
-              <p className="text-gray-500 mb-5">Real Estate Agent</p>
-              <p className="w-[339px]">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-              </p>
-            </div>
-            <div>
-              <img className="mb-5" src="../images/agent-mark.png" alt="" />
-              <h3 className="font-bold font-secondary text-[24px] mb-2.5">
-                Mark Allen
-              </h3>
-              <p className="text-gray-500 mb-5">Real Estate Agent</p>
-              <p className="w-[339px]">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-              </p>
-            </div>
+            <AgentCard
+              image="../images/agent-Leasie.png"
+              name="Leasie Willions"
+            />
+
+            <AgentCard
+              image="../images/agent-johnson.png"
+              name="Johnson Watson"
+            />
+            <AgentCard image="../images/agent-mark.png" name="Mark Allen" />
           </div>
           <img
             className="absolute right-0 bottom-[-25px] hidden xl:block xl:translate-x-[219%] translate-y-[50%]"
