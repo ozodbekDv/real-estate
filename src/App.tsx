@@ -24,6 +24,7 @@ import {
   NotFound,
   Login,
   SignUp,
+  PrivacyPolicy,
 } from "./pages/";
 import ProtectedRoute from "./components/ProtectedRoutes";
 
@@ -84,6 +85,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <Terms />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/privacy",
+          element: (
+            <ProtectedRoute>
+              <PrivacyPolicy />
             </ProtectedRoute>
           ),
         },
