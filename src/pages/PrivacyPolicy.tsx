@@ -1,8 +1,15 @@
 import Hero from "@/components/Hero";
 
+import { motion } from "framer-motion";
+
 function PrivacyPolicy() {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <Hero title="Privacy Policy" image="../images/policy-bg.png" />
       <div className="container flex flex-col gap-[30px] text-[18px] mt-[50px] mb-[100px]">
         <h2 className="heading text-[40px]">Overview</h2>
@@ -63,7 +70,7 @@ function PrivacyPolicy() {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

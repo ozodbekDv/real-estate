@@ -4,6 +4,8 @@ import Hero from "@/components/Hero";
 import { ChevronRight, LucidePlay } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { motion } from "framer-motion";
+
 const missionData = [
   {
     title: "Committed Team",
@@ -25,7 +27,12 @@ const missionData = [
 
 function About() {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <Hero title={"About Us"} image="../images/about/about-bg.png" />
       <div className="container flex flex-col gap-[100px] text-dark-500 relative">
         <img
@@ -128,7 +135,7 @@ function About() {
           />
         </section>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

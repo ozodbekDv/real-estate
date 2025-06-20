@@ -1,8 +1,15 @@
 import Hero from "@/components/Hero";
 
+import { motion } from "framer-motion";
+
 function Terms() {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <Hero title="Terms & Conditions" image="../images/terms-bg.png" />
       <div className="container flex flex-col gap-[30px] text-[18px] mt-[50px] mb-[100px]">
         <h2 className="heading text-[40px]">Overview</h2>
@@ -65,7 +72,7 @@ function Terms() {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

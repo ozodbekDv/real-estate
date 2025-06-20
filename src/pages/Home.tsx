@@ -3,6 +3,10 @@ import BackForwardBtns from "@/components/BackForwardBtns";
 import { ArrowLeft, ArrowRight, Bath, Bed, CarFront } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store";
+
 const serviceData = [
   {
     icon: "../icons/medal.svg",
@@ -96,9 +100,30 @@ const testimonialsData = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1, // har bir card 100ms kechikib chiqadi
+      duration: 0.5,
+    },
+  }),
+};
+
+const MotionAgentCard = motion(TestimonialsCard);
+
 function Home() {
+  const { user } = useSelector((state: RootState) => state.user);
   return (
-    <main className="[background-image:url(../icons/hero-pattern-top.svg)] bg-right-top bg-no-repeat text-dark-500">
+    <motion.main
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="[background-image:url(../icons/hero-pattern-top.svg)] bg-right-top bg-no-repeat text-dark-500"
+    >
       <section className="container flex justify-between my-[50px] flex-col md:flex-row items-center text-center">
         <h1 className="font-secondary font-bold lg:text-[60px] text-[28px] md:text-[36px]">
           Let’s start search <br /> for your dream home
@@ -108,12 +133,21 @@ function Home() {
             It is a long established fact that a reader will be distracted by
             the readable content of a page when looking at its layout.
           </p>
-          <Link
-            to="/login"
-            className="rounded-[10px] bg-primary-500 py-4 text-white inline-block px-10 md:px-[60px] lg:px-[90px] mx-auto"
-          >
-            Get Started
-          </Link>
+          {user ? (
+            <Link
+              to="/about"
+              className="rounded-[10px] bg-primary-500 py-4 text-white inline-block px-10 md:px-[60px] lg:px-[90px] mx-auto"
+            >
+              About us
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="rounded-[10px] bg-primary-500 py-4 text-white inline-block px-10 md:px-[60px] lg:px-[90px] mx-auto"
+            >
+              Get Started
+            </Link>
+          )}
         </div>
       </section>
       <div className="left-0 right-0">
@@ -340,12 +374,20 @@ function Home() {
           </div>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-[30px]">
             {testimonialsData.map((user, index) => (
-              <TestimonialsCard user={user} key={index} />
+              <MotionAgentCard
+                key={index}
+                custom={index} // 👈 Bu MUHIM!
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={cardVariants}
+                user={user}
+              />
             ))}
           </div>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }
 

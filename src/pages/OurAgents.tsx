@@ -1,9 +1,16 @@
 import AgentCard from "@/components/AgentCard";
 import Hero from "@/components/Hero";
 
+import { motion } from "framer-motion";
+
 function OurAgents() {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <Hero title="Our Agents" image="../images/agents/hero.png" />
       <section className="container pb-[100px] relative mt-[50px]">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[30px] items-center">
@@ -26,7 +33,7 @@ function OurAgents() {
           alt="shape"
         />
       </section>
-    </div>
+    </motion.div>
   );
 }
 
