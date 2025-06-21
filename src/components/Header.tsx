@@ -27,10 +27,6 @@ const pages = [
     path: "/agents",
   },
   {
-    name: "Blog",
-    path: "/Blog",
-  },
-  {
     name: "Contact Us",
     path: "/Contact",
   },
@@ -38,6 +34,7 @@ const pages = [
 
 function Header() {
   const location = useLocation();
+  const user = localStorage.getItem("user");
   return (
     <div className="container">
       <div className="flex justify-around md:justify-between items-center py-5">
@@ -60,7 +57,7 @@ function Header() {
             );
           })}
         </nav>
-        <button className="button-primary">Login</button>
+        {!user && <button className="button-primary">Login</button>}
         {/* Mobile nav */}
         <div className="absolute right-[40px] md:hidden">
           <Sheet>

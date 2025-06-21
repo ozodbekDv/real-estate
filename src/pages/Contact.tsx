@@ -3,13 +3,21 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@radix-ui/react-label";
 
+import { motion } from "framer-motion";
+
 function Contact() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
   return (
-    <div className="bg-[#fbfbfb]">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="bg-[#fbfbfb]"
+    >
       <Hero title="Contact Us" image="../images/contact-bg.png" />
       <div className="container mt-[50px] pb-[100px] grid grid-cols-1 md:grid-cols-2 gap-[50px]">
         <div className="max-w-[555px]">
@@ -135,7 +143,7 @@ function Contact() {
           </button>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

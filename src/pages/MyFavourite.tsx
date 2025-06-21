@@ -1,6 +1,8 @@
 import { PropertiesCard } from "@/components";
 import Hero from "@/components/Hero";
 
+import { motion } from "framer-motion";
+
 const userData = [
   {
     name: "Alexa Mate",
@@ -54,14 +56,19 @@ const userData = [
 
 function MyFavourite() {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
       <Hero image="../images/favourite/hero-bg.png" title="My Favourite" />
       <div className="grid grid-cols-3 gap-[30px] container mt-[50px] mb-[100px]">
         {userData.map((user, index) => (
           <PropertiesCard user={user} key={index} />
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
