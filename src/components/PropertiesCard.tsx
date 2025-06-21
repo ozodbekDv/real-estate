@@ -1,5 +1,7 @@
 import { Heart, Plus, Share2 } from "lucide-react";
 
+import { motion } from "framer-motion";
+
 type User = {
   name: string;
   title: string;
@@ -13,10 +15,28 @@ interface Usern {
   user: User;
 }
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+    },
+  }),
+};
+
 function Card({ user }: Usern) {
   const { name, title, price, profileImage, image, secondTitle } = user;
   return (
-    <div className="p-5 rounded-2xl bg-white relative">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={cardVariants}
+      className="p-5 rounded-2xl bg-white relative"
+    >
       <button className="button-share absolute right-8 top-9 z-10">
         <Heart />
       </button>
@@ -63,7 +83,7 @@ function Card({ user }: Usern) {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

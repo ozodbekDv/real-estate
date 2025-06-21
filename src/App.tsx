@@ -27,6 +27,7 @@ import {
   PrivacyPolicy,
 } from "./pages/";
 import ProtectedRoute from "./components/ProtectedRoutes";
+import Product from "./pages/Product";
 
 function App() {
   const dispatch = useDispatch();
@@ -77,6 +78,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <Properties />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/properties/:id",
+          element: (
+            <ProtectedRoute>
+              <Product />
             </ProtectedRoute>
           ),
         },
