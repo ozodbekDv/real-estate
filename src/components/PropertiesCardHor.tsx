@@ -1,4 +1,5 @@
 import { Heart, Plus, Share2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type User = {
   name: string;
@@ -16,10 +17,12 @@ function PropertiesCardHor({ user }: Usern) {
   const { name, title, price, profileImage, image } = user;
   return (
     <div className="p-5 rounded-2xl bg-white relative flex gap-[30px]">
-      <button className="button-share absolute left-[286px] top-9 z-10">
+      <button className="button-share absolute left-[260px] top-9 z-10">
         <Heart />
       </button>
-      <img src={image} alt="" />
+      <Link to="/properties/1" className="p-0">
+        <img src={image} alt="" className="m-0 p-0" />
+      </Link>
       <div>
         <h4 className="font-secondary font-bold text-dark-500 text-2xl">
           {title}
