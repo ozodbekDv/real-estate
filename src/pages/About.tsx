@@ -1,7 +1,8 @@
 import AgentCard from "@/components/AgentCard";
 import BackForwardBtns from "@/components/BackForwardBtns";
 import Hero from "@/components/Hero";
-import { LucidePlay } from "lucide-react";
+import { ChevronRight, LucidePlay } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
