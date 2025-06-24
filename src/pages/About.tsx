@@ -1,9 +1,13 @@
 import AgentCard from "@/components/AgentCard";
 import BackForwardBtns from "@/components/BackForwardBtns";
 import Hero from "@/components/Hero";
+
+import AnimateShape from "../components/AnimateShape";
+
 import { LucidePlay } from "lucide-react";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const missionData = [
   {
@@ -24,7 +28,37 @@ const missionData = [
   },
 ];
 
+const carousel = [
+  {
+    image: "../images/about/carousel-1.jpg",
+  },
+  {
+    image: "../images/about/carousel-2.jpg",
+  },
+  {
+    image: "../images/about/carousel-3.jpg",
+  },
+  {
+    image: "../images/about/carousel-4.jpg",
+  },
+  {
+    image: "../images/about/carousel-5.webp",
+  },
+];
+
 function About() {
+  const [playVideo, setPlayVideo] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const next = () =>
+    setCarouselIndex((prev) =>
+      carouselIndex === carousel.length - 2 ? 1 : prev + 1
+    );
+  const prev = () =>
+    setCarouselIndex((prev) =>
+      carouselIndex === 1 ? carousel.length - 2 : prev - 1
+    );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -33,6 +67,7 @@ function About() {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <Hero title={"About Us"} image="../images/about/about-bg.png" />
+
       <div className="container flex flex-col gap-[100px] text-dark-500 relative">
         <img
           className="absolute right-0 translate-x-[50%]"
@@ -67,31 +102,44 @@ function About() {
             ))}
           </div>
         </div>
-        <div className="relative">
-          <img
-            className="rounded-2xl"
-            src="../images/about/about-video-bg.png"
-            alt="video background"
-          />
-          <div className="bg-primary-500 text-white rounded-full w-14 h-14 flex items-center justify-center absolute top-[50%] right-[50%] translate-y-[-50%]">
-            <div className="absolute inset-0 rounded-full bg-white/10 scale-[1.6]"></div>
-            <div className="absolute inset-0 rounded-full bg-white/20 scale-[1.2]"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <LucidePlay />
+        <div className="relative h-[600px]">
+          {playVideo && (
+            <video
+              className="rounded-2xl"
+              autoPlay
+              onEnded={() => setPlayVideo(false)}
+              src="./about.mp4"
+            />
+          )}
+          {!playVideo && (
+            <div className="relative">
+              <img
+                className="rounded-2xl"
+                src="../images/about/about-video-bg.png"
+                alt="video background"
+              />
+              <div
+                onClick={() => setPlayVideo((prev) => !prev)}
+                className="bg-primary-500 cursor-pointer text-white rounded-full w-14 h-14 flex items-center justify-center absolute top-[50%] right-[50%] translate-y-[-50%] active:scale-85 transition-transform duration-100"
+              >
+                <div className="absolute inset-0 rounded-full bg-white/10 scale-[1.6]"></div>
+                <div className="absolute inset-0 rounded-full bg-white/20 scale-[1.2]"></div>
+                <button className="absolute inset-0 flex items-center justify-center cursor-pointer">
+                  <LucidePlay />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
-        <div className="flex gap-[60px] relative">
-          <img
-            src="../images/about/projects-middle.svg"
-            alt=""
-            className="absolute translate-[-75%]"
+
+        <div className="flex flex-col lg:flex-row gap-[60px] relative">
+          <AnimateShape
+            image="../images/about/projects-middle.svg"
+            type={false}
           />
-          <div className="flex gap-[30px] items-center">
-            <img src="../images/about/projects-white.png" alt="" />
-            <img src="../images/about/projects-brown.png" alt="" />
-          </div>
-          <div>
+
+          {/* TEXT PART */}
+          <div className="order-1 lg:order-2">
             <h2 className="heading text-[40px]">
               250+ Projects all over the world
             </h2>
@@ -102,7 +150,31 @@ function About() {
               adipiscing sollicitudin et. Ac sed lorem amet, purus. Risus ut
               nulla id lectus mi.
             </p>
-            <BackForwardBtns />
+            <BackForwardBtns next={next} prev={prev} />
+          </div>
+
+          {/* IMAGE PART */}
+          <div className="order-2 lg:order-1 w-[500px] flex items-center gap-[60px]">
+            {carousel
+              .slice(carouselIndex, carouselIndex + 1)
+              .map((item, index) => (
+                <img
+                  key={index}
+                  src={item.image}
+                  className="h-[300px] w-[200px] object-cover rounded-2xl"
+                  alt="image"
+                />
+              ))}
+            {carousel
+              .slice(carouselIndex + 1, carouselIndex + 2)
+              .map((item, index) => (
+                <img
+                  key={index}
+                  src={item.image}
+                  className="h-[400px] w-[250px] object-cover rounded-2xl"
+                  alt="image"
+                />
+              ))}
           </div>
         </div>
       </div>
