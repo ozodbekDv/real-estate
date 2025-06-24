@@ -106,7 +106,7 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.1, // har bir card 100ms kechikib chiqadi
+      delay: i * 0.1,
       duration: 0.5,
     },
   }),
