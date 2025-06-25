@@ -138,7 +138,6 @@ function About() {
             type={false}
           />
 
-          {/* TEXT PART */}
           <div className="order-1 lg:order-2">
             <h2 className="heading text-[40px]">
               250+ Projects all over the world

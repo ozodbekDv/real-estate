@@ -1,6 +1,6 @@
-import { ArrowLeftIcon, ArrowRightIcon, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { ArrowLeftIcon, ArrowRightIcon, ChevronRight } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -21,20 +21,24 @@ import {
   PaginationItem,
   PaginationLink,
 } from "@/components/ui/pagination";
-
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import PropertiesCardHor from "@/components/PropertiesCardHor";
-
 import { motion } from "framer-motion";
 
-const userData = [
+const properties = [
   {
     name: "Alexa Mate",
     title: "Luxury Apartment in California",
     price: 250000,
     profileImage: "../images/alexa-mate.png",
     image: "../images/alexa-bg.png",
+    location: { country: "USA", city: "California" },
+    type: "Buy",
+    category: "Apartment",
+    size: 1800,
+    bedrooms: 2,
+    bathrooms: 1,
   },
   {
     name: "Joe Smith",
@@ -42,46 +46,76 @@ const userData = [
     price: 7500000,
     profileImage: "../images/joe-smith.png",
     image: "../images/joe-bg.png",
+    location: { country: "USA", city: "Miami" },
+    type: "Buy",
+    category: "Villa",
+    size: 2200,
+    bedrooms: 4,
+    bathrooms: 3,
   },
   {
     name: "Perry John",
     title: "Duplex Apartment for Rent in California",
-    secondTitle: " ",
     price: 4378,
     profileImage: "../images/perry-john.png",
     image: "../images/perry-bg.png",
-  },
-  {
-    name: "Wade Warren",
-    title: "Elegant Villa sale in Miami",
-    price: 400000,
-    profileImage: "../images/wade-warren.png",
-    image: "../images/wade-bg.png",
-  },
-  {
-    name: "John Willions",
-    title: "Duplex Apartment for Rent in California",
-    price: 7865,
-    profileImage: "../images/john-willions.png",
-    image: "../images/john-bg.png",
-  },
-  {
-    name: "Robert Fox",
-    title: "Luxury Apartment in California",
-    price: 4579920,
-    profileImage: "../images/robert-fox.png",
-    image: "../images/robert-bg.png",
-  },
-  {
-    name: "John Willions",
-    title: "Duplex Apartment for Rent in California",
-    price: 7865,
-    profileImage: "../images/john-willions.png",
-    image: "../images/john-bg.png",
+    location: { country: "USA", city: "California" },
+    type: "Rent",
+    category: "Duplex",
+    size: 1450,
+    bedrooms: 2,
+    bathrooms: 1,
   },
 ];
 
-function Properties() {
+export default function Properties() {
+  const [selectedCountry, setSelectedCountry] = useState<string | undefined>();
+  const [selectedType, setSelectedType] = useState<
+    "Buy" | "Rent" | undefined
+  >();
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [minSize, setMinSize] = useState(0);
+  const [maxSize, setMaxSize] = useState(3000);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(10000000);
+  const [selectedBedrooms, setSelectedBedrooms] = useState<
+    number | undefined
+  >();
+  const [selectedBathrooms, setSelectedBathrooms] = useState<
+    number | undefined
+  >();
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | undefined>();
+
+  const resetFilters = () => {
+    setSelectedCountry(undefined);
+    setSelectedType(undefined);
+    setSelectedCategories([]);
+    setMinSize(0);
+    setMaxSize(3000);
+    setMinPrice(0);
+    setMaxPrice(10000000);
+    setSelectedBedrooms(undefined);
+    setSelectedBathrooms(undefined);
+    setSortOrder(undefined);
+  };
+
+  const filtered = properties
+    .filter((p) => !selectedCountry || p.location.city === selectedCountry)
+    .filter((p) => !selectedType || p.type === selectedType)
+    .filter(
+      (p) =>
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(p.category)
+    )
+    .filter((p) => p.size >= minSize && p.size <= maxSize)
+    .filter((p) => p.price >= minPrice && p.price <= maxPrice)
+    .filter((p) => !selectedBedrooms || p.bedrooms === selectedBedrooms)
+    .filter((p) => !selectedBathrooms || p.bathrooms === selectedBathrooms)
+    .sort((a, b) => {
+      if (!sortOrder) return 0;
+      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+    });
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -95,180 +129,202 @@ function Properties() {
         <ChevronRight className="text-dark-500 w-[15px] mx-[7px]" />
         Properties
       </h2>
+
       <div className="flex gap-[50px]">
-        {/* Filter left */}
+        {/* FILTER SECTION */}
         <div className="w-[244px] sticky top-10">
-          <Accordion
-            type="multiple"
-            className="w-full"
-            defaultValue={["item-1"]}
-          >
+          <Accordion type="multiple" defaultValue={["item-1"]}>
+            {/* Country */}
             <AccordionItem value="item-1">
-              <AccordionTrigger className="hover:no-underline">
-                Select Location
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 text-balance">
-                <Select>
+              <AccordionTrigger>Select Location</AccordionTrigger>
+              <AccordionContent>
+                <Select
+                  value={selectedCountry}
+                  onValueChange={setSelectedCountry}
+                >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select country" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="California">California</SelectItem>
                     <SelectItem value="Miami">Miami</SelectItem>
-                    <SelectItem value="NewYork">New York</SelectItem>
                   </SelectContent>
                 </Select>
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger className="hover:no-underline">
-                Property Type
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-2.5 text-balance">
-                <div className="flex gap-2.5">
-                  <Checkbox id="buy" name="buy" />
-                  <Label htmlFor="buy">Buy</Label>
-                </div>
 
-                <div className="flex gap-2.5">
-                  <Checkbox id="rent" name="rent" />
-                  <Label htmlFor="rent">Rent</Label>
-                </div>
+            {/* Type */}
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Property Type</AccordionTrigger>
+              <AccordionContent className="flex flex-col gap-2.5">
+                {["Buy", "Rent"].map((type) => (
+                  <div key={type} className="flex gap-2.5">
+                    <Checkbox
+                      checked={selectedType === type}
+                      onCheckedChange={(checked) =>
+                        setSelectedType(
+                          checked ? (type as "Buy" | "Rent") : undefined
+                        )
+                      }
+                    />
+                    <Label>{type}</Label>
+                  </div>
+                ))}
               </AccordionContent>
             </AccordionItem>
+
+            {/* Categories */}
             <AccordionItem value="item-3">
-              <AccordionTrigger className="hover:no-underline">
-                Categories
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 text-balance">
-                <div className="flex gap-2.5">
-                  <Checkbox id="Apartment" name="Apartment" />
-                  <Label htmlFor="Apartment">Apartment</Label>
-                </div>
-                <div className="flex gap-2.5">
-                  <Checkbox id="Villa" name="Villa" />
-                  <Label htmlFor="Villa">Villa</Label>
-                </div>
-                <div className="flex gap-2.5">
-                  <Checkbox id="Duplex" name="Duplex" />
-                  <Label htmlFor="Duplex">Duplex</Label>
-                </div>
-                <div className="flex gap-2.5">
-                  <Checkbox id="Houses" name="Houses" />
-                  <Label htmlFor="Houses">Houses</Label>
-                </div>
-                <div className="flex gap-2.5">
-                  <Checkbox id="Penthouse" name="Penthouse" />
-                  <Label htmlFor="Penthouse">Penthouse</Label>
-                </div>
+              <AccordionTrigger>Categories</AccordionTrigger>
+              <AccordionContent className="flex flex-col gap-2.5">
+                {["Apartment", "Villa", "Duplex"].map((cat) => (
+                  <div key={cat} className="flex gap-2.5">
+                    <Checkbox
+                      checked={selectedCategories.includes(cat)}
+                      onCheckedChange={(checked) =>
+                        setSelectedCategories((prev) =>
+                          checked
+                            ? [...prev, cat]
+                            : prev.filter((c) => c !== cat)
+                        )
+                      }
+                    />
+                    <Label>{cat}</Label>
+                  </div>
+                ))}
               </AccordionContent>
             </AccordionItem>
+
+            {/* Size */}
             <AccordionItem value="item-4">
-              <AccordionTrigger className="hover:no-underline">
-                Property Size
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 text-balance">
-                <p>Size: $0 - $2400 sqft</p>
-                <Slider />
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-5">
-              <AccordionTrigger className="hover:no-underline">
-                Price Range
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 text-balance text-[16px]">
-                <p>Price: $10000 - $30000</p>
-                <img className="-mb-4" src="../images/chart-bg.png" alt="" />
-                <Slider />
-                <div className="flex justify-between">
-                  <p>$10000</p>
-                  <p>$30000</p>
+              <AccordionTrigger>Property Size</AccordionTrigger>
+              <AccordionContent>
+                <Slider
+                  min={0}
+                  max={3000}
+                  step={100}
+                  value={[minSize, maxSize]}
+                  onValueChange={([min, max]) => {
+                    setMinSize(min);
+                    setMaxSize(max);
+                  }}
+                />
+                <div className="text-sm mt-2">
+                  Size: {minSize} - {maxSize} sqft
                 </div>
               </AccordionContent>
             </AccordionItem>
+
+            {/* Price */}
+            <AccordionItem value="item-5">
+              <AccordionTrigger>Price Range</AccordionTrigger>
+              <AccordionContent>
+                <Slider
+                  min={0}
+                  max={10000000}
+                  step={10000}
+                  value={[minPrice, maxPrice]}
+                  onValueChange={([min, max]) => {
+                    setMinPrice(min);
+                    setMaxPrice(max);
+                  }}
+                />
+                <div className="text-sm mt-2">
+                  Price: ${minPrice} - ${maxPrice}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* Rooms */}
             <AccordionItem value="item-6">
-              <AccordionTrigger className="hover:no-underline">
-                Rooms
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 text-balance">
-                <span>Bedroom</span>
-                <Select name="bedroom" defaultValue="5">
+              <AccordionTrigger>Rooms</AccordionTrigger>
+              <AccordionContent>
+                <Label>Bedrooms</Label>
+                <Select
+                  value={selectedBedrooms?.toString()}
+                  onValueChange={(val) => setSelectedBedrooms(Number(val))}
+                >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Theme" />
+                    <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1">1</SelectItem>
-                    <SelectItem value="2">2</SelectItem>
-                    <SelectItem value="3">3</SelectItem>
-                    <SelectItem value="4">4</SelectItem>
-                    <SelectItem value="5">5</SelectItem>
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <SelectItem key={n} value={n.toString()}>
+                        {n}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
-                <p>Bathroom</p>
-                <Select name="bathroom" defaultValue="3">
+
+                <Label className="mt-4">Bathrooms</Label>
+                <Select
+                  value={selectedBathrooms?.toString()}
+                  onValueChange={(val) => setSelectedBathrooms(Number(val))}
+                >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Theme" />
+                    <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1">1</SelectItem>
-                    <SelectItem value="2">2</SelectItem>
-                    <SelectItem value="3">3</SelectItem>
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <SelectItem key={n} value={n.toString()}>
+                        {n}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+
+          <button
+            onClick={resetFilters}
+            className="mt-6 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          >
+            Reset Filters
+          </button>
         </div>
-        <div className="">
-          <div className="flex justify-between">
-            <p>Showing 1–16 of 72 results</p>
-            <Select>
+
+        {/* RESULTS */}
+        <div className="flex-1">
+          <div className="flex justify-between items-center mb-4">
+            <p>Showing {filtered.length} results</p>
+            <Select
+              value={sortOrder}
+              onValueChange={(val) => setSortOrder(val as "asc" | "desc")}
+            >
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Shot by Price: Low to High" />
+                <SelectValue placeholder="Sort by Price" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="California">California</SelectItem>
-                <SelectItem value="Miami">Miami</SelectItem>
-                <SelectItem value="NewYork">New York</SelectItem>
+                <SelectItem value="asc">Price: Low to High</SelectItem>
+                <SelectItem value="desc">Price: High to Low</SelectItem>
               </SelectContent>
             </Select>
           </div>
-          <div className="flex flex-col gap-[30px] mt-[30px]">
-            {userData.map((item, index) => (
-              <PropertiesCardHor key={index} user={item} />
+
+          <div className="flex flex-col gap-4">
+            {filtered.map((item, idx) => (
+              <PropertiesCardHor key={idx} user={item} />
             ))}
-            <Pagination>
-              <PaginationContent className="flex gap-2.5">
-                <PaginationItem>
-                  <ArrowLeftIcon />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink className="bg-primary-500 text-white hover:bg-primary-700 hover:text-white">
-                    1
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink>2</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink>3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink>4</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink>5</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <ArrowRightIcon />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
           </div>
+
+          <Pagination className="mt-8">
+            <PaginationContent>
+              <PaginationItem>
+                <ArrowLeftIcon />
+              </PaginationItem>
+              {[1, 2, 3].map((p) => (
+                <PaginationItem key={p}>
+                  <PaginationLink>{p}</PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <ArrowRightIcon />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
       </div>
     </motion.div>
   );
 }
-
-export default Properties;
